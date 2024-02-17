@@ -3,19 +3,19 @@
         <ul class="nav nav-tabs d-flex justify-content-evenly my-3" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
-                    role="tab" aria-controls="home" aria-selected="true" >Quick</button>
+                    role="tab" aria-controls="home" aria-selected="true">Quick</button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="smart-tab" data-bs-toggle="tab" data-bs-target="#smart" type="button"
-                    role="tab" aria-controls="smart" aria-selected="true" >Smart</button>
+                    role="tab" aria-controls="smart" aria-selected="true">Smart</button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
-                    role="tab" aria-controls="profile" aria-selected="false"  >Regular</button>
+                    role="tab" aria-controls="profile" aria-selected="false">Regular</button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button"
-                    role="tab" aria-controls="contact" aria-selected="false"  >Advance</button>
+                    role="tab" aria-controls="contact" aria-selected="false">Advance</button>
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">
@@ -23,25 +23,18 @@
                 <div class="my-3">
                     <p class="m-0 fs-5 text-center">Enter Your Order Quantity</p>
                     <div class="form-floating my-3">
-                        <input type="number" class="form-control" id="floatingInput" v-model="quick">
+                        <input type="number" class="form-control" id="floatingInput" placeholder="Quantity" v-model="quick">
                         <label for="floatingInput">Quantity</label>
-                        <p class="text-muted m-0 mt-2" style="font-size: 12px;">* Total quantity will split in equal
-                            propotion between all sizes and colors</p>
-                        <div class="d-flex justify-content-between border container py-2 mb-3"
-                            style="background-color: #e8e8e8;">
-                            <p class=" mb-0">Actual Ordered Qty</p>
-                            <p class=" fw-bold text-center mb-0">
-                                {{ calculateRegularSizeTotal() }} pcs
-                            </p>
-                        </div>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="date" class="form-control" id="floatingPassword" v-model="expected">
-                        <label for="floatingPassword">Select Expected Date of Delivery</label>
+                        <input type="date" class="form-control" id="floatingPassword" placeholder="Expected Date"
+                            v-model="expected">
+                        <label for="floatingPassword">Expected Date</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <textarea class="form-control as" v-model="comment" id="floatingTextarea"></textarea>
-                        <label for="floatingTextarea">Message</label>
+                        <textarea class="form-control as" placeholder="Leave a comment here" v-model="comment"
+                            id="floatingTextarea"></textarea>
+                        <label for="floatingTextarea">Comments</label>
                     </div>
                     <div class="d-flex justify-content-center mt-3">
                         <button class="btn btn-outline-primary w-100" type="submit">Submit</button>
@@ -50,8 +43,8 @@
             </div>
             <div class="tab-pane fade" id="smart" role="tabpanel" aria-labelledby="smart-tab">
                 <div class="my-3">
-                    <p class="m-0 fs-5 mt-3 mb-2">Selected Colors</p>
-                    <div class="d-flex gap-2 mb-2">
+                    <h3>Color Selector</h3>
+                    <div class="d-flex gap-2">
                         <div v-for="(color, index) in list.colors" :key="index" class="color-selector"
                             @click="toggleColor(color)">
                             <img :src="color.name" class="rounded-circle me-2 p-1"
@@ -59,39 +52,26 @@
                                 style="width: 45px; height: 45px; object-fit: cover;" alt="">
                         </div>
                     </div>
-                    <!-- <p class="text-muted m-0" style="font-size: 12px;">* Selection  means you are adding all sizes to the Order</p> -->
-                    <p class="text-muted m-0 mb-3" style="font-size: 12px;">* Deselection means you are removing all sizes
-                        from the order</p>
 
-                    <p class="m-0 fs-5 mt-1">Selected Sizes</p>
-                    <div class="d-flex justify-content-between flex-wrap mx-2">
-                        <div v-for="(size, index) in list.sizes " :key="index" @click="toggleSize(size)"
-                            class="rounded my-2" style="width: 60px;"
-                            :style="{ border: size.isSelected ? '2px solid black' : 'none' }">
-                            <div class="text-center rounded   p-2 m-1 fw-bold  text-white"
-                                style="background-color: #F48B29;" :for="'size' + index">
-                                {{ size.name }}
-                            </div>
+                    <h3 class="mt-3">Size Selector</h3>
+                    <div class="d-flex justify-content-center flex-wrap">
+                        <div v-for="(size, index) in list.sizes " :key="index" class="btn-group col" role="group"
+                            aria-label="Basic checkbox toggle button group">
+                            <div @click="toggleSize(size)" class="bg-primary text-center rounded p-2 fw-bold m-1 text-white"
+                                style="width: 50px;" :style="{ border: size.isSelected ? '2px solid black' : 'none' }"
+                                :for="'size' + index">{{ size.name }}</div>
                         </div>
                     </div>
-                    <!-- <p class="text-muted m-0" style="font-size: 12px;">* Selection  means you are adding all colors to the Order</p> -->
-                    <p class="text-muted m-0 mb-3" style="font-size: 12px;">* Deselection means you are removing all colors
-                        from the order</p>
 
-                    <div class="my-4">
-                        <div class="form-floating mb-2">
-                            <input type="number" class="form-control" id="floatingInput">
+                    <div class="mt-3">
+                        <div class="form-floating mb-3">
+                            <input type="date" class="form-control" id="floatingPassword" placeholder="Expected Date"
+                                v-model="expected">
+                            <label for="floatingPassword">Expected Date</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="number" class="form-control" id="floatingInput" placeholder="quantity">
                             <label for="floatingInput">Order Quantity</label>
-                        </div>
-                        <p class="text-muted m-0 mb-4" style="font-size: 12px;">* Total quantity will split in equal
-                            propotion between all sizes and colors</p>
-                        <div class="form-floating mb-3">
-                            <input type="date" class="form-control" id="floatingPassword" v-model="expected">
-                            <label for="floatingPassword">Select Expected Date of Delivery</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <textarea class="form-control as" v-model="comment" id="floatingTextarea"></textarea>
-                            <label for="floatingTextarea">Message</label>
                         </div>
                     </div>
 
@@ -107,9 +87,7 @@
                         <table class="table border border-1" style="background-color: #f8f9fa;">
                             <thead>
                                 <tr style="line-height: 45px;">
-                                    <th class="text-center" scope="col">
-                                        <span class="fw-normal">SKU</span>{{ skuCount }}
-                                    </th>
+                                    <th class="text-center" scope="col">Qty</th>
                                     <th scope="col" v-for="(headSize, headSizeIndex) in list.sizes"
                                         :key="'head-size-' + headSizeIndex">
                                         <div class="fw-bold d-flex flex-column align-items-center">
@@ -130,28 +108,24 @@
                                         <input type="number" class="form-control text-center" style="width: 3rem;"
                                             v-model="regular[`0_${sizeIndex}`]">
                                     </td>
+                                    <td class="text-center">
+                                        ₹{{ calculateRegularSizeTotal() }}
+                                    </td>
                                 </tr>
                             </tbody>
-
                         </table>
-                    </div>
-                    <div class="d-flex justify-content-between border container py-2 mb-3"
-                        style="background-color: #e8e8e8;">
-                        <p class=" mb-0">Total Ordering Quantity</p>
-                        <p class=" fw-bold text-center mb-0">
-                            {{ calculateRegularSizeTotal() }} pcs
-                        </p>
                     </div>
 
                     <div class="form-floating mb-3">
                         <input type="date" class="form-control" id="floatingPassword" placeholder="Expected Date"
                             v-model="expected">
-                        <label for="floatingPassword">Select Expected Date of Delivery</label>
+                        <label for="floatingPassword">Expected Date</label>
                     </div>
 
                     <div class="form-floating mb-3">
-                        <textarea class="form-control as" v-model="comment" id="floatingTextarea"></textarea>
-                        <label for="floatingTextarea">Message</label>
+                        <textarea class="form-control as" placeholder="Leave a comment here" v-model="comment"
+                            id="floatingTextarea"></textarea>
+                        <label for="floatingTextarea">Comments</label>
                     </div>
 
                     <div class="d-flex justify-content-center mt-3">
@@ -166,7 +140,7 @@
                         <table class="table border border-1" style="background-color: #f8f9fa;">
                             <thead>
                                 <tr style="line-height: 45px;">
-                                    <th class="text-center" scope="col"><span class="fw-normal">SKU</span>{{ skuCount }}</th>
+                                    <th class="text-center" scope="col">Qty</th>
                                     <th scope="col" v-for="(headSize, headSizeIndex) in list.sizes"
                                         :key="'head-size-' + headSizeIndex">
                                         <div class="fw-bold d-flex flex-column align-items-center">
@@ -185,11 +159,8 @@
                                         </div> -->
                                     </td>
                                     <td class="" v-for="(size, sizeIndex) in list.sizes" :key="'size-' + sizeIndex">
-                                        <div class="">
-
-                                            <input type="number" class="form-control text-center px-0" style="width: 3rem;"
-                                                v-model="advance[`${colorindex}_${sizeIndex}`]">
-                                        </div>
+                                        <input type="number" class="form-control text-center" style="width: 3rem;"
+                                            v-model="advance[`${colorindex}_${sizeIndex}`]">
                                     </td>
                                 </tr>
                                 <tr scope="row">
@@ -201,18 +172,18 @@
                                 </tr>
                             </tbody>
                         </table>
-
                     </div>
 
                     <div class="form-floating mb-3">
                         <input type="date" class="form-control" id="floatingPassword" placeholder="Expected Date"
                             v-model="expected">
-                        <label for="floatingPassword">Select Expected Date of Delivery</label>
+                        <label for="floatingPassword">Expected Date</label>
                     </div>
 
                     <div class="form-floating mb-3">
-                        <textarea class="form-control as" v-model="comment" id="floatingTextarea"></textarea>
-                        <label for="floatingTextarea">Message</label>
+                        <textarea class="form-control as" placeholder="Leave a comment here" v-model="comment"
+                            id="floatingTextarea"></textarea>
+                        <label for="floatingTextarea">Comments</label>
                     </div>
 
                     <div class="d-flex justify-content-center mt-3">
@@ -235,24 +206,18 @@ export default {
             publicPath: process.env.BASE_URL,
             advance: [],
             regular: [],
-            quick: "",
-            expected: "",
-            comment: "",
-        };
+            quick: '',
+            expected: '',
+            comment: '',
+
+        }
     },
     computed: {
         list() {
             let listId = this.$route.params.listId;
             return this.$store.getters.getList(listId);
         },
-        skuCount() {
-            return this.list.colors.length * this.list.sizes.length;
-        },
-    },
-    watch: {
-        quick(value) {
-            this.calculateRegularAndAdvance(value);
-        },
+
     },
     methods: {
         toggleColor(color) {
@@ -262,7 +227,7 @@ export default {
             size.isSelected = !size.isSelected;
         },
         advanceSubmit() {
-            console.log(this.advance);
+            console.log(this.advance)
         },
         calculateAdvanceSizeTotal(footSizeindex) {
             let total = 0;
@@ -277,42 +242,45 @@ export default {
         },
         calculateRegularSizeTotal() {
             let total = 0;
+
+            // Regular
             Object.entries(this.list.sizes).forEach((size, sizeIndex) => {
                 total += this.regular[`0_${sizeIndex}`];
+
+                // Advance
+                // for (let colorIndex = 0; colorIndex < this.list.colors.length; colorIndex++) {
+                //     this.advance[`${colorIndex}_${sizeIndex}`] = this.regular[`0_${sizeIndex}`];
+                // }
             });
             return total;
         },
         calculateQuickSizeTotal() {
             let total = 0;
+
+            // Regular
             Object.entries(this.list.sizes).forEach((size, sizeIndex) => {
                 total += this.regular[`0_${sizeIndex}`];
+
+                // Advance
                 for (let colorIndex = 0; colorIndex < this.list.colors.length; colorIndex++) {
-                    this.advance[`${colorIndex}_${sizeIndex}`] = Math.round(this.regular[`0_${sizeIndex}`]);
+                    this.advance[`${colorIndex}_${sizeIndex}`] = this.regular[`0_${sizeIndex}`];
                 }
+
+
             });
             return total;
         },
-        calculateRegularAndAdvance(value) {
-            let dividedValueBySizes = value / this.list.sizes.length;
-            let dividedValueByColorAndSizes = value / (this.list.sizes.length * this.list.colors.length);
-            Object.entries(this.list.sizes).forEach((size, sizeIndex) => {
-                this.regular[`0_${sizeIndex}`] = Math.round(dividedValueBySizes);
-                for (let colorIndex = 0; colorIndex < this.list.colors.length; colorIndex++) {
-                    this.advance[`${colorIndex}_${sizeIndex}`] = Math.round(dividedValueByColorAndSizes);
-                }
-            });
-        },
+
     },
     created() {
         for (let colorIndex = 0; colorIndex < this.list.colors.length; colorIndex++) {
             for (let sizeIndex = 0; sizeIndex < this.list.sizes.length; sizeIndex++) {
-                this.advance[`${colorIndex}_${sizeIndex}`] = "";
-                this.regular[`0_${sizeIndex}`] = "";
+                this.advance[`${colorIndex}_${sizeIndex}`] = '';
+                this.regular[`0_${sizeIndex}`] = '';
             }
         }
     },
-};
-
+}
 </script>
 
 <style lang="scss" scoped>
@@ -357,7 +325,4 @@ textarea.form-control {
 .color-selector input[type="checkbox"]:checked+label {
     border: 2px solid #000000;
 }
-
-.nav-link {
-    color:#F48B29;
-}</style>
+</style>

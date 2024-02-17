@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="navshadow">
         <nav class="navbar fixed-bottom navbar-light bg-light" :class="{ 'navbar-hidden': navbarHidden }">
             <div id="mobile bottomNav">
                 <div class="bnav d-flex h-100">
@@ -8,35 +8,30 @@
                             <div class="btn-front position-absolute d-flex justify-content-evenly w-100 "
                                 style="bottom:0; width: 100%; background-color: #f2f2f2; ">
                                 <div class="d-grid">
-                                    <RouterLink to="/OrderPage"  :class="{'text-danger' : currentRoute ==='OrderPage' }" style="text-decoration:none;color:black;text-align: center;" >
+                                    <RouterLink to="/" :class="{'text-dark' : currentRoute ==='DashboardPage' }" style="text-decoration:none;color:#F48B29;text-align: center;">
+                                        <i class="bi bi-house-door fs-4"></i>
+                                        <p style="font-size: 14px;">Home</p>
+                                    </RouterLink>
+                                </div>
+                                <div class="d-grid">
+                                    <RouterLink to="/OrderPage" :class="{'text-dark' : currentRoute ==='OrderPage' }" style="text-decoration:none;color:#F48B29;text-align: center;" >
                                       <i class="bi bi-journal-text fs-4"></i>
                                         <p style="font-size: 14px;margin: 0">Orders</p>
                                     </RouterLink>
                                 </div>
                                 <div class="d-grid">
-                                    <RouterLink to="/"  :class="{'text-danger' : currentRoute ==='DashboardPage' }" style="text-decoration:none;color:black;text-align: center;">
-                                        <i class="bi bi-shop-window fs-4"></i>
-                                        <p style="font-size: 14px;">Dashboard</p>
-                                    </RouterLink>
-                                </div>
-                                <div class="d-grid">
-                                    <RouterLink to="/CatalogPage"  :class="{'text-danger' : currentRoute ==='CatalogPage' }" style="text-decoration:none;color:black;text-align: center;">
+                                    <RouterLink to="/Catalog"  :class="{'text-dark' : currentRoute ==='Catalog' }" style="text-decoration:none;color:#F48B29;text-align: center;">
                                         <i class="bi bi-layers fs-4"></i>
                                         <p style="font-size: 14px;">Catalogs</p>
                                     </RouterLink>
                                 </div>
-                                <!-- <div class="d-grid">
-                                    <RouterLink to="/"  :class="{'text-danger' : currentRoute ==='' }" style="text-decoration:none;color:black;text-align: center;">
-                                        <i class="bi bi-journal-arrow-down fs-4"></i>
-                                        <p style="font-size: 14px;">SO</p>
+                                 <div class="d-grid">
+                                    <RouterLink to="/StockPage"  :class="{'text-dark' : currentRoute ==='StockPage' }" style="text-decoration:none;color:#F48B29;text-align: center;">
+                                        <i class="bi bi-boxes fs-4"></i>
+                                        <p style="font-size: 14px;">Stock</p>
                                     </RouterLink>
                                 </div>
-                                <div class="d-grid">
-                                    <RouterLink to="/"  :class="{'text-danger' : currentRoute ==='' }" style="text-decoration:none;color:black;text-align: center;">
-                                      <i class="bi bi-download fs-4"></i>
-                                        <p style="font-size: 14px;">Receipts</p>
-                                    </RouterLink>
-                                </div> -->
+                                
                             </div>
                         </div>
                     </div>
@@ -79,12 +74,15 @@ export default {
 <style scoped>
 .navbar {
   background-color: #f1f1f1;
-  height: 80px;
+  height: 70px;
   transition: transform 0.5s;
   transform: translateY(0);
 }
 
 .navbar-hidden {
   transform: translateY(100%);
+}
+.navshadow{
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
 </style>
